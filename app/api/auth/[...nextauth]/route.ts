@@ -1,15 +1,15 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import NextAuth, { AuthOptions } from 'next-auth'
-import GithubProvider from 'next-auth/providers/github'
+import NextAuth from 'next-auth'
+import GitHubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import prisma from '@/app/libs/prismadb'
 import bcrypt from 'bcrypt'
 
-export const authOptions: AuthOptions = {
+const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    GithubProvider({
+    GitHubProvider({
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
@@ -29,7 +29,9 @@ export const authOptions: AuthOptions = {
         }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+          where: {
+            email: credentials.email,
+          },
         })
 
         if (!user || !user.hashedPassword) {
@@ -50,15 +52,13 @@ export const authOptions: AuthOptions = {
     }),
   ],
   pages: {
-    signIn: '/', // redirect to your homepage or login
+    signIn: '/',
   },
   debug: process.env.NODE_ENV === 'development',
   session: {
     strategy: 'jwt',
   },
-  secret: process.env.NEXTAUTH_SECRET, // ✅ typo fixed from NEXTAUT_SECRET
-}
-
-const handler = NextAuth(authOptions)
+  secret: process.env.NEXTAUTH_SECRET,
+})
 
 export { handler as GET, handler as POST }
