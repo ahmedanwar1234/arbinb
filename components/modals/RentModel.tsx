@@ -56,7 +56,7 @@ const roomCount=watch('roomCount')
 const bathroomCount=watch('bathroomCount')
 const imageSrc=watch('imageSrc')
 
-const Map=useMemo(()=>dynamic(()=>import('../Map'), {ssr:false}),[location]) 
+const Map = useMemo(() => dynamic(() => import('../Map'), { ssr: false }), [])
 
 const setCustomValue=(id:string,value:any)=>{
     setValue(id,value,{shouldDirty:true,shouldTouch:true,shouldValidate:true})
