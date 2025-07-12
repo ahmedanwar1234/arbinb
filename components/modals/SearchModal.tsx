@@ -121,11 +121,11 @@ const Map = useMemo(() => dynamic(() => import('../Map'), { ssr: false }), [])
         title="Where do you wanna go?"
         subtitle="Find the perfect location!"
       />
-      <CountrySelect 
-        value={location} 
-        onChange={(value) => 
-          setLocation(value as CountrySelectValue)} 
-      />
+   <CountrySelect 
+  value={location as CountrySelectValue}
+  onChange={(value) => setLocation(value as CountrySelectValue)} 
+/>
+
       <hr />
       <Map center={location?.latlng} />
     </div>
