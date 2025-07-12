@@ -4,6 +4,8 @@ import EmptyState from "@/components/EmptyState";
 import getListings, { IListingsParams } from "./actions/getListing";
 import ListingCard from "@/components/listings/ListingCard";
 import getCurrentUser from "./actions/getCurrentUser";
+import { Listing } from "@prisma/client";
+import { SafeUser } from "./types";
 
 interface HomeProps{
   searchParams:IListingsParams
@@ -29,10 +31,12 @@ if(listings.length===0){
 
 {listings.map((listing:any)=>{
   return (
-    <ListingCard key={listing.id} data={listing} currentUser={currentUser} >
-
-    </ListingCard>
-  )
+<ListingCard 
+  key={listing.id}
+  data={listing as unknown as Listing}
+  currentUser={currentUser as SafeUser}
+/>
+   )
 })}
 
 
