@@ -16,7 +16,9 @@ interface ModalProps {
   disabled?: boolean;
   secondaryAction?: () => void;
   secondaryActionLabel?: string;
+  children?: React.ReactNode; // ✅ Add this line
 }
+
 
 const Modal: React.FC<ModalProps> = ({
   isOpen,

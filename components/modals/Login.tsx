@@ -108,10 +108,7 @@ First time useing Airbnb
     </div>
 )
   return (
-    <Modal footer={footerContent} body={bodyContent} disabled={isLoading} isOpen={loginModal.isOpen} title='Login' actionLabel='Continue' onClose={loginModal.onClose} onSubmit={handleSubmit(onSubmit)}>
-
-    </Modal>
-  )
+    <Modal footer={footerContent} body={bodyContent} disabled={isLoading} isOpen={loginModal.isOpen} title='Login' actionLabel='Continue' onClose={loginModal.onClose} onSubmit={handleSubmit(onSubmit)}/>  )
 }
 
 export default LoginModal
